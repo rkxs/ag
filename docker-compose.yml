@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./services/nginx/Dockerfile
+      args:
+        NGINX_VERSION: nginx:${NGINX_VERSION}
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        NGINX_INSTALL_APPS: ${NGINX_INSTALL_APPS}
+    container_name: nginx
+    hostname: nginx
+    ports:
+      - "${NGINX_HTTP_HOST_PORT}:80"
+      - "${NGINX_HTTPS_HOST_PORT}:443"
+    volumes:
+      - ${SOURCE_DIR}:/www/:rw
+      - ${CONF_DIR}:/conf:rw
+      - ${CONF_DIR}:/etc/nginx/conf.d/:rw
+      - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
+      - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
+    environment:
+      TZ: "$TZ"
+    restart: always
+    network_mode: "host"
+
+  ag:
+    image: teddysun/xray:${AG_VERSION}
+    container_name: ag
+    hostname: ag
+    privileged: true
+    restart: always
+    volumes:
+      - ${CONF_DIR}:/etc/xray/:rw
+      - ${AG_LOG_DIR}:/var/log/xray/:rw
+    network_mode: "host"
