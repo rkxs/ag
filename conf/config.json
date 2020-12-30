@@ -1,27 +1,69 @@
 {
   "log": {
-    "access": "/var/log/xray/access.log",
-    "error": "/var/log/xray/error.log",
     "loglevel": "warning"
   },
   "inbounds": [
     {
-      "port":23456,
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "9644BA2D-A434-4164-8A33-5D8A1F2BFB62",
+            "flow": "xtls-rprx-direct",
+            "level": 0,
+            "email": "love@example.com"
+          }
+        ],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": 8001,
+            "xver": 1
+          },
+          {
+            "path": "/24DF32C48AD9/",
+            "dest": 23456,
+            "xver": 1
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "xtls",
+        "xtlsSettings": {
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/xray.pem",
+              "keyFile": "/etc/xray/xray.key"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "port": 23456,
       "listen": "127.0.0.1",
       "tag": "vmess-in",
       "protocol": "vmess",
       "settings": {
         "clients": [
           {
-            "id":"123456-1234-1234-1234-123456",
-            "alterId":2
+            "id": "82000003-EF3F-41A0-9994-B1EED456ABC6",
+            "level": 0,
+            "email": "love@example.com"
           }
         ]
       },
       "streamSettings": {
         "network": "ws",
+        "security": "none",
         "wsSettings": {
-          "path":"/112233445566/"
+          "acceptProxyProtocol": true,
+          "path": "/24DF32C48AD9/"
         }
       }
     }
