@@ -4,27 +4,22 @@
   },
   "inbounds": [
     {
-      "port": 443,
-      "protocol": "vless",
+      "listen": "127.0.0.1",
+      "port": 23456,
+      "protocol": "trojan",
       "settings": {
         "clients": [
           {
-            "id": "9644BA2D-A434-4164-8A33-5D8A1F2BFB62",
-            "flow": "xtls-rprx-direct",
+            "password": "3BB10ADC-D413-44A9-8EF0-E2D3E41A2B92",
             "level": 0,
-            "email": "love@example.com"
+            "email": "love@example.com",
+            "flow":"xtls-rprx-direct"
           }
         ],
-        "decryption": "none",
         "fallbacks": [
           {
             "dest": 8001,
-            "xver": 1
-          },
-          {
-            "path": "/24DF32C48AD9/",
-            "dest": 23456,
-            "xver": 1
+            "xver": 0
           }
         ]
       },
@@ -43,43 +38,35 @@
           ]
         }
       }
-    },
-    {
-      "port": 23456,
-      "listen": "127.0.0.1",
-      "tag": "vmess-in",
-      "protocol": "vmess",
-      "settings": {
-        "clients": [
-          {
-            "id": "82000003-EF3F-41A0-9994-B1EED456ABC6",
-            "level": 0,
-            "email": "love@example.com"
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "wsSettings": {
-          "acceptProxyProtocol": true,
-          "path": "/24DF32C48AD9/"
-        }
-      }
     }
   ],
   "outbounds": [
     {
       "protocol": "freedom",
-      "settings": { },
+      "settings": {
+        "domainStrategy": "UseIP"
+      },
       "tag": "direct"
     },
     {
       "protocol": "blackhole",
-      "settings": { },
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      },
       "tag": "blocked"
     }
   ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": ["geoip:private"],
+        "outboundTag": "blocked"
+      }
+    ]
+  },
   "dns": {
     "servers": [
       "https+local://1.1.1.1/dns-query",
@@ -87,18 +74,19 @@
       "1.0.0.1",
       "8.8.8.8",
       "8.8.4.4",
-      "localhost"
-    ]
-  },
-  "routing": {
-    "domainStrategy": "AsIs",
-    "rules": [
+      "localhost",
       {
-        "type": "field",
-        "inboundTag": [
-          "vmess-in"
-        ],
-        "outboundTag": "direct"
+        "address": "38.94.109.16",
+        "port": 53,
+        "domains": [
+          "domain:netflix.com",
+          "domain:netflix.net",
+          "domain:nflximg.net",
+          "domain:nflximg.com",
+          "domain:nflxvideo.net",
+          "domain:nflxso.net",
+          "domain:nflxext.com"
+        ]
       }
     ]
   }
