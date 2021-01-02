@@ -7,6 +7,13 @@
       "listen": "127.0.0.1",
       "port": 23456,
       "protocol": "trojan",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      },
       "settings": {
         "clients": [
           {
@@ -20,6 +27,11 @@
           {
             "dest": 8001,
             "xver": 0
+          },
+          {
+            "dest": 8002,
+            "xver": 0,
+            "alpn": "h2"
           }
         ]
       },
@@ -28,12 +40,15 @@
         "security": "xtls",
         "xtlsSettings": {
           "alpn": [
+            "h2",
             "http/1.1"
           ],
+          "minVersion": "1.2",
           "certificates": [
             {
               "certificateFile": "/etc/xray/xray.pem",
-              "keyFile": "/etc/xray/xray.key"
+              "keyFile": "/etc/xray/xray.key",
+              "ocspStapling": 3600
             }
           ]
         }
