@@ -31,19 +31,21 @@ services:
     hostname: ag
     privileged: true
     restart: always
+    depends_on:
+      - nginx
     volumes:
       - ${CONF_DIR}:/etc/xray/:rw
       - ${AG_LOG_DIR}:/var/log/xray/:rw
     network_mode: "host"
 
-  frps:
-    image: ${FRP_IMAGE_VERSION}
-    container_name: frps
-    hostname: frps
-    privileged: true
-    restart: always
-    working_dir: /root
-    volumes:
-      - ${CONF_DIR}/frps.ini:/frps.ini:ro
-    command: /frp/frps -c /frps.ini
-    network_mode: "host"
+#  frps:
+#    image: ${FRP_IMAGE_VERSION}
+#    container_name: frps
+#    hostname: frps
+#    privileged: true
+#    restart: always
+#    working_dir: /root
+#    volumes:
+#      - ${CONF_DIR}/frps.ini:/frps.ini:ro
+#    command: /frp/frps -c /frps.ini
+#    network_mode: "host"
