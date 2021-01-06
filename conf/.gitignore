@@ -1,0 +1,6 @@
+*
+!.gitignore
+!config.json
+!ex=.conf
+!ex-.conf
+!frps.ini
