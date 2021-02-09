@@ -63,14 +63,16 @@ fi
 restart_docker_smartdns() {
 if command_exists docker; then
   docker rm -f smartdns
-  echo -e "${Error} ${RedBG} 已强制删除 docker smartdns${Font}"
+  echo -e "${OK} ${GreenBG} 已强制删除 docker smartdns ${Font}"
+
   docker-compose up -d smartdns
+
   if [ $? -eq 0 ]; then
-    restart_docker_smartdns
     echo -e "${OK} ${GreenBG} docker-compose 启动 smartdns ${Font}"
   else
     echo -e "${Error} ${RedBG} docker-compose 启动 smartdns 失败${Font}"
   fi
+
 else
     echo -e "${Error} ${RedBG} docker 未安装${Font}"
 fi
