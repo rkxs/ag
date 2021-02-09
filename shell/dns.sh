@@ -64,7 +64,8 @@ restart_docker_smartdns() {
 if command_exists docker; then
   docker rm -f smartdns
   echo -e "${OK} ${GreenBG} 已强制删除 docker smartdns ${Font}"
-
+  
+  cd ../
   docker-compose up -d smartdns
 
   if [ $? -eq 0 ]; then
