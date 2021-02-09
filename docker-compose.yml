@@ -44,8 +44,8 @@ services:
       dockerfile: ./services/smartdns/Dockerfile
     container_name: smartdns
     hostname: smartdns
-    #volumes:
-    #  - ${CONF_SMARTDNS_DIR}:/etc/smartdns/:rw
+    volumes:
+      - ${CONF_SMARTDNS_DIR}:/etc/smartdns/:rw
     restart: always
     network_mode: "host"
 
