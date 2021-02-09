@@ -38,6 +38,17 @@ services:
       - ${AG_LOG_DIR}:/var/log/xray/:rw
     network_mode: "host"
 
+  smartdns:
+    build:
+      context: .
+      dockerfile: ./services/smartdns/Dockerfile
+    container_name: smartdns
+    hostname: smartdns
+    #volumes:
+    #  - ${CONF_SMARTDNS_DIR}:/etc/smartdns/:rw
+    restart: always
+    network_mode: "host"
+
 #  frps:
 #    image: ${FRP_IMAGE_VERSION}
 #    container_name: frps
