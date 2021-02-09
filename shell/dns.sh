@@ -70,7 +70,9 @@ fi
 
 set_resolv_conf() {
   echo
+  chattr -i /etc/resolv.conf
   echo "nameserver 127.0.0.1" > /etc/resolv.conf
+  chattr +i /etc/resolv.conf
   echo -e "${OK} ${GreenBG} /etc/resolv.conf 已配置为 127.0.0.1 ${Font}"
   echo
 }
@@ -81,7 +83,8 @@ menu() {
     echo
     echo -e "${Green}0.${Font} 退出"
     echo -e "${Green}1.${Font} 重启 docker smartdns 容器"
-    echo -e "${Green}2.${Font} DNS解锁 奈飞 \n"
+    echo -e "${Green}2.${Font} 设置 /etc/resolv.conf 为 127.0.0.1 并加锁"
+    echo -e "${Green}3.${Font} DNS解锁 奈飞 \n"
 
     read -rp "请输入数字：" menu_num
     case $menu_num in
@@ -93,6 +96,10 @@ menu() {
         menu
         ;;
     2)
+        set_resolv_conf
+        menu
+        ;;
+    3)
         unlock_netflix
         menu
         ;;
