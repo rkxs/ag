@@ -39,7 +39,7 @@ services:
     network_mode: "host"
 
   smartdns:
-    image: registry.cn-hongkong.aliyuncs.com/renkx/smartdns:latest
+    image: registry.cn-beijing.aliyuncs.com/renkx/smartdns:latest
     container_name: smartdns
     hostname: smartdns
     volumes:
