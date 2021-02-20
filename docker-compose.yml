@@ -48,14 +48,14 @@ services:
     restart: always
     network_mode: "host"
 
-  smartdns:
-    image: registry.cn-beijing.aliyuncs.com/renkx/smartdns:latest
-    container_name: smartdns
-    hostname: smartdns
-    volumes:
-      - ${CONF_SMARTDNS_DIR}:/etc/smartdns/:rw
-    restart: always
-    network_mode: "host"
+#  smartdns:
+#    image: registry.cn-beijing.aliyuncs.com/renkx/smartdns:latest
+#    container_name: smartdns
+#    hostname: smartdns
+#    volumes:
+#      - ${CONF_SMARTDNS_DIR}:/etc/smartdns/:rw
+#    restart: always
+#    network_mode: "host"
 
 #  使用 Dockerfile 生成镜像
 #  smartdns:
