@@ -28,14 +28,18 @@ dns:
   ratelimit_whitelist: []
   refuse_any: true
   upstream_dns:
-    - 114.114.114.114
-    - 114.114.115.115
-    - 119.29.29.29
-    - 182.254.118.118
-    - 223.5.5.5
-    - 223.6.6.6
-    - 180.76.76.76
-    - '[/example.local/]94.140.14.140'
+    - 8.8.8.8
+    - 8.8.4.4
+    - 1.1.1.1
+    - 1.0.0.1
+    - '# 台湾'
+    - 168.95.1.1
+    - tcp://8.8.8.8
+    - tcp://8.8.4.4
+    - tcp://1.1.1.1
+    - tcp://1.0.0.1
+    - '# 台湾'
+    - tcp://168.95.1.1
   upstream_dns_file: ""
   bootstrap_dns:
     - 9.9.9.10
@@ -46,7 +50,10 @@ dns:
   fastest_addr: true
   allowed_clients: []
   disallowed_clients: []
-  blocked_hosts: []
+  blocked_hosts:
+    - version.bind
+    - id.server
+    - hostname.bind
   cache_size: 4194304
   cache_ttl_min: 600
   cache_ttl_max: 600
