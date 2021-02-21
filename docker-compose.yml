@@ -39,7 +39,7 @@ services:
     network_mode: "host"
 
   ad:
-    image: adguard/adguardhome
+    image: adguard/adguardhome:${AD_VERSION}
     container_name: ad
     hostname: ad
     volumes:
