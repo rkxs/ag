@@ -26,7 +26,7 @@ services:
     network_mode: "host"
 
   ag:
-    image: teddysun/xray:${AG_VERSION}
+    image: registry.cn-beijing.aliyuncs.com/renkx/xray:${AG_VERSION}
     container_name: ag
     hostname: ag
     privileged: true
