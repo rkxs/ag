@@ -31,8 +31,6 @@ services:
     hostname: ag
     privileged: true
     restart: always
-    depends_on:
-      - nginx
     volumes:
       - ${CONF_DIR}:/etc/xray/:rw
       - ${AG_LOG_DIR}:/var/log/xray/:rw
@@ -47,6 +45,16 @@ services:
       - ${CONF_ADGUARDHOME_DIR}:/opt/adguardhome/conf:rw
     restart: always
     network_mode: "host"
+
+  gost:
+    image: ginuerzh/gost
+    container_name: gost
+    hostname: gost
+    volumes:
+      - ${CONF_DIR}/gost.json:/gost.json
+    restart: always
+    network_mode: "host"
+    command: -C /gost.json
 
 #  smartdns:
 #    image: registry.cn-beijing.aliyuncs.com/renkx/smartdns:latest
