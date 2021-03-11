@@ -3,6 +3,7 @@
 !config.json
 !ex=.conf
 !ex-.conf
+!default-.conf
 !frps.ini
 !/smartdns
 !/adguardhome
