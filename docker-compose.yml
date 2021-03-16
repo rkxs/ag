@@ -2,25 +2,20 @@ version: "3"
 
 services:
   nginx:
-    image: registry.cn-beijing.aliyuncs.com/renkx/nginx:${NGINX_VERSION}
+    image: registry.cn-beijing.aliyuncs.com/renkx/nginx:latest
     container_name: nginx
     hostname: nginx
     volumes:
       - ${SOURCE_DIR}:/www/:rw
       - ${CONF_DIR}:/conf:rw
-      - ${CONF_DIR}:/etc/nginx/conf.d/:rw
+      - ${CONF_DIR}:/etc/nginx/http.d/:rw
       - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
       - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
     restart: always
     network_mode: "host"
 #  nginx:
 #    build:
-#      context: .
-#      dockerfile: ./services/nginx/Dockerfile
-#      args:
-#        NGINX_VERSION: nginx:${NGINX_VERSION}
-#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-#        NGINX_INSTALL_APPS: ${NGINX_INSTALL_APPS}
+#      context: ./services/nginx
 #    container_name: nginx
 #    hostname: nginx
 #    #ports:
@@ -29,11 +24,9 @@ services:
 #    volumes:
 #      - ${SOURCE_DIR}:/www/:rw
 #      - ${CONF_DIR}:/conf:rw
-#      - ${CONF_DIR}:/etc/nginx/conf.d/:rw
+#      - ${CONF_DIR}:/etc/nginx/http.d/:rw
 #      - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
 #      - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
-#    environment:
-#      TZ: "$TZ"
 #    restart: always
 #    network_mode: "host"
 
